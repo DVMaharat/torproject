@@ -40,7 +40,16 @@
             $scope.fullName = null;
         }
         $scope.nextUser = function (user) {
-            if(user == null) return null;
+            if(user == null){
+                swal({
+                    title: "התורים הסתיימו בהצלחה",
+                    text: "הנה הוסיף תורים לרשימה",
+                    icon: "success",
+                    buttons: false,
+                    timer: 3000,
+                }); 
+                return null;
+            }
             if($scope.users.length > 1){
             $scope.users[0].status = 2;     
             swal({
