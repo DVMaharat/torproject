@@ -1,15 +1,16 @@
 ﻿(function () {
 
-    var app = angular.module('app', []);
+    var app = angular.module('app', ['ngSweetAlert']);
 
 
 
-    app.controller('indexCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+    app.controller('indexCtrl', ['$scope', '$http', '$location','SweetAlert'. function ($scope, $http, $location,SweetAlert) {
         var html = "https://torapi20180404071944.azurewebsites.net";
 
         var absUrl = $location.absUrl();
         $scope.nextUserInServis = {};
 
+  
 
         $scope.users = [];
         $scope.serviceUser = {}; 
@@ -28,7 +29,7 @@
         }
         $scope.nextUser = function (user) {
             $scope.users[0].status = 2;            
-            upDateUser(user);       
+            upDateUser(user);                 
         }
 
 
@@ -68,6 +69,15 @@
 
         }
 
+/*
+        $scope.cancelDelete = function () {
+            console.log("cancel");
+            alertModalInstance.dismiss('cancel');
+          };
+          $scope.ok = function () {
+            console.log("ok");
+            alertModalInstance.close(true);
+          };*/
     }]);
 
 })();
