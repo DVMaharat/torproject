@@ -62,8 +62,8 @@
                         $scope.users.push(response.data[i]);
                     }
                     $scope.next = response.data[0];
-                    $scope.users[0].status = 1;
                     $scope.users = response.data;
+                    $scope.users[0].status = 1;
                 });
 
         }
