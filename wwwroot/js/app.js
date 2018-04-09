@@ -40,15 +40,24 @@
                 }); 
                 return null;
             }
-            if($scope.users.length === 1) $scope.users[0].status = 2;     
-               
-            swal({
-                title: "התור הבאה הוא  : " + $scope.users[1].id ,
-                text: $scope.users[1].fullName,
-                icon: "success",
-                buttons: false,
-                timer: 3000,
-            }); 
+            if($scope.users.length === 1) {
+                swal({
+                    title: "לא נשארו עוד תורים ברשימה",
+                    text: "הנה הוסיף תורים לרשימה",
+                    icon: "success",
+                    buttons: false,
+                    timer: 3000,
+                });     
+            }else{
+                $scope.users[0].status = 2;      
+                swal({
+                    title: "התור הבאה הוא  : " + $scope.users[1].id ,
+                    text: $scope.users[1].fullName,
+                    icon: "success",
+                    buttons: false,
+                    timer: 3000,
+                }); 
+            }
             upDateUser(user);                 
         }
 
