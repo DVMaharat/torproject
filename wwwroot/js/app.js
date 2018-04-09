@@ -71,22 +71,20 @@
                     headers: { 'Content-Type': 'application/json; charset=utf-8' }
                 }).then(function (success) {
                
-                    if($scope.users.length >= 1){
-                        var index = $scope.users.indexOf(user);
-                        $scope.users.splice(index, 1); 
-                        $scope.next = null;
-                        $scope.users[0].status = 1;
-                        $scope.next = $scope.users[0];
-                        if($scope.users.length == 0)
-                            swal({
-                                title: "התורים הסתיימו בהצלחה",
-                                text: "הנה הוסיף תורים לרשימה",
-                                icon: "info",
-                                buttons: false,
-                                timer: 3000,
-                            });     
-                       
-                    }
+                    
+                var index = $scope.users.indexOf(user);
+                $scope.users.splice(index, 1); 
+                $scope.next = null;
+                $scope.users[0].status = 1;
+                $scope.next = $scope.users[0];
+                if($scope.users.length == 0)
+                    swal({
+                        title: "התורים הסתיימו בהצלחה",
+                        text: "הנה הוסיף תורים לרשימה",
+                        icon: "info",
+                        buttons: false,
+                        timer: 3000,
+                    });                       
                 });
         }
 
