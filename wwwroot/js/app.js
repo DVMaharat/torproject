@@ -81,14 +81,14 @@
                     var index = $scope.users.indexOf(user);
                     $scope.users.splice(index, 1); 
                     $scope.next = null;
-                    
-                    swal({
-                        title: "התורים הסתיימו בהצלחה",
-                        text: "הנה הוסיף תורים לרשימה",
-                        icon: "success",
-                        buttons: false,
-                        timer: 3000,
-                    });     
+                    if($scope.users.length == 1)
+                        swal({
+                            title: "התורים הסתיימו בהצלחה",
+                            text: "הנה הוסיף תורים לרשימה",
+                            icon: "success",
+                            buttons: false,
+                            timer: 3000,
+                        });     
                     if($scope.users.length > 1){
                         $scope.users[0].status = 1;
                         $scope.next = $scope.users[0];
