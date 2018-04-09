@@ -48,8 +48,7 @@
                     buttons: false,
                     timer: 3000,
                 });     
-            }else{
-                $scope.users[0].status = 2;      
+            }else{                   
                 swal({
                     title: "התור הבאה הוא  : " + $scope.users[1].id ,
                     text: $scope.users[1].fullName,                
@@ -57,6 +56,7 @@
                     timer: 3000,
                 }); 
             }
+            $scope.users[0].status = 2;  
             upDateUser(user);                 
         }
 
