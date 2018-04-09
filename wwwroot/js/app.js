@@ -6,15 +6,7 @@
 
     app.controller('indexCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
         var html = "https://torapi20180404071944.azurewebsites.net";
-
-        var absUrl = $location.absUrl();
-        $scope.nextUserInServis = {};
-
-        
-
-
         $scope.users = [];
-        $scope.serviceUser = {}; 
         getAllUsers();
 
         $scope.addUuser = function (fName) {
@@ -23,8 +15,6 @@
             }
             $http.post(html + '/api/home', { fullname: fName }).then(function (success) {
                 getAllUsers();
-
-               
                 swal({
                     title: fName + " הצטרפה לתור",
                     text: "You clicked the button!",
@@ -42,7 +32,7 @@
         $scope.nextUser = function (user) {
             if(user == null){
                 swal({
-                    title: "התורים הסתיימו בהצלחה",
+                    title: "אין עוד תורים ברשימה",
                     text: "הנה הוסיף תורים לרשימה",
                     icon: "success",
                     buttons: false,
@@ -50,51 +40,46 @@
                 }); 
                 return null;
             }
-            if($scope.users.length > 1){
-            $scope.users[0].status = 2;     
+            if($scope.users.length === 1) $scope.users[0].status = 2;     
+               
             swal({
-                title: "התור הבאה הוא  : "+$scope.users[1].id ,
+                title: "התור הבאה הוא  : " + $scope.users[1].id ,
                 text: $scope.users[1].fullName,
                 icon: "success",
                 buttons: false,
                 timer: 3000,
-              }); 
-            }
+            }); 
             upDateUser(user);                 
         }
 
 
         function upDateUser(user) {
-
             $http({
-                method: 'PUT',
-                url: html + "/api/home/" + user.id,
-                data: {
-                    fullname: user
-                },
-                headers: { 'Content-Type': 'application/json; charset=utf-8' }
-            }).then(function (success) {
-                $scope.nextUserInServis = "";
-                return success;
-                });
-                if($scope.users.length >= 1){
-                    var index = $scope.users.indexOf(user);
-                    $scope.users.splice(index, 1); 
-                    $scope.next = null;
-                    if($scope.users.length == 1)
-                        swal({
-                            title: "התורים הסתיימו בהצלחה",
-                            text: "הנה הוסיף תורים לרשימה",
-                            icon: "success",
-                            buttons: false,
-                            timer: 3000,
-                        });     
-                    if($scope.users.length > 1){
+                    method: 'PUT',
+                    url: html + "/api/home/" + user.id,
+                    data: {
+                        fullname: user
+                    },
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                }).then(function (success) {
+               
+                    if($scope.users.length >= 1){
+                        var index = $scope.users.indexOf(user);
+                        $scope.users.splice(index, 1); 
+                        $scope.next = null;
                         $scope.users[0].status = 1;
                         $scope.next = $scope.users[0];
+                        if($scope.users.length == 0)
+                            swal({
+                                title: "התורים הסתיימו בהצלחה",
+                                text: "הנה הוסיף תורים לרשימה",
+                                icon: "success",
+                                buttons: false,
+                                timer: 3000,
+                            });     
+                       
                     }
-                }
-         
+                });
         }
 
         function getAllUsers() {
