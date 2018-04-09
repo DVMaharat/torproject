@@ -44,7 +44,7 @@
                 swal({
                     title: "לא נשארו עוד תורים ברשימה",
                     text: "הנה הוסיף תורים לרשימה",
-                    icon: "success",
+                    icon: "info",
                     buttons: false,
                     timer: 3000,
                 });     
@@ -52,8 +52,7 @@
                 $scope.users[0].status = 2;      
                 swal({
                     title: "התור הבאה הוא  : " + $scope.users[1].id ,
-                    text: $scope.users[1].fullName,
-                    icon: "info",
+                    text: $scope.users[1].fullName,                
                     buttons: false,
                     timer: 3000,
                 }); 
