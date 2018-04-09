@@ -5,7 +5,7 @@
 
 
     app.controller('indexCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
-        var html = "http://torapi20180404071944.azurewebsites.net";
+        var html = "https://torapi20180404071944.azurewebsites.net";
 
         var absUrl = $location.absUrl();
         $scope.nextUserInServis = {};
