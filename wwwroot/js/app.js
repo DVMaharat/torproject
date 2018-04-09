@@ -1,16 +1,17 @@
 ﻿(function () {
 
-    var app = angular.module('app', ['ngSweetAlert']);
+    var app = angular.module('app', []);
 
 
 
-    app.controller('indexCtrl', ['$scope', '$http', '$location','SweetAlert'. function ($scope, $http, $location,SweetAlert) {
+    app.controller('indexCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
         var html = "https://torapi20180404071944.azurewebsites.net";
 
         var absUrl = $location.absUrl();
         $scope.nextUserInServis = {};
 
-  
+        
+
 
         $scope.users = [];
         $scope.serviceUser = {}; 
@@ -22,13 +23,31 @@
             }
             $http.post(html + '/api/home', { fullname: fName }).then(function (success) {
                 getAllUsers();
+
+               
+                swal({
+                    title: fName + " הצטרפה לתור",
+                    text: "You clicked the button!",
+                    icon: "success",
+                    buttons: false,
+                    timer: 3000,
+                  });     
                 $scope.fullName = null;
                 return success;
             });
+
+            
             $scope.fullName = null;
         }
         $scope.nextUser = function (user) {
-            $scope.users[0].status = 2;            
+            $scope.users[0].status = 2;     
+            swal({
+                title: "התור הבאה הוא  : "+$scope.users[1].id,
+                text: $scope.users[1].fullName,
+                icon: "success",
+                buttons: false,
+                timer: 3000,
+              });     
             upDateUser(user);                 
         }
 
@@ -56,7 +75,6 @@
         function getAllUsers() {
             $http.get(html + "/api/home")
                 .then(function (response) {
-
                     for (var i = 0; i < response.data.length; i++) {
                         var data = new Date(response.data[i].dateCreated);
                         response.data[i].dateCreated = data.getHours() + ":" + data.getMinutes();
@@ -68,16 +86,6 @@
                 });
 
         }
-
-/*
-        $scope.cancelDelete = function () {
-            console.log("cancel");
-            alertModalInstance.dismiss('cancel');
-          };
-          $scope.ok = function () {
-            console.log("ok");
-            alertModalInstance.close(true);
-          };*/
     }]);
 
 })();
