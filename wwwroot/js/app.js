@@ -75,8 +75,7 @@
                 var index = $scope.users.indexOf(user);
                 $scope.users.splice(index, 1); 
                 $scope.next = null;
-                $scope.users[0].status = 1;
-                $scope.next = $scope.users[0];
+                
                 if($scope.users.length == 0)
                     swal({
                         title: "התורים הסתיימו בהצלחה",
@@ -84,7 +83,11 @@
                         icon: "info",
                         buttons: false,
                         timer: 3000,
-                    });                       
+                    }); 
+                    else {
+                        $scope.users[0].status = 1;
+                        $scope.next = $scope.users[0];
+                    }                      
                 });
         }
 
