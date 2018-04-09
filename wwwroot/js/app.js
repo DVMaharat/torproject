@@ -40,14 +40,17 @@
             $scope.fullName = null;
         }
         $scope.nextUser = function (user) {
+            if(user == null) return null;
+            if($scope.users.length > 1){
             $scope.users[0].status = 2;     
             swal({
-                title: "התור הבאה הוא  : "+$scope.users[1].id,
+                title: "התור הבאה הוא  : "+$scope.users[1].id ,
                 text: $scope.users[1].fullName,
                 icon: "success",
                 buttons: false,
                 timer: 3000,
-              });     
+              }); 
+            }
             upDateUser(user);                 
         }
 
@@ -65,10 +68,23 @@
                 $scope.nextUserInServis = "";
                 return success;
                 });
-            var index = $scope.users.indexOf(user);
-            $scope.users.splice(index, 1); 
-            $scope.users[0].status = 1;
-            $scope.next = $scope.users[0];
+                if($scope.users.length >= 1){
+                    var index = $scope.users.indexOf(user);
+                    $scope.users.splice(index, 1); 
+                    $scope.next = null;
+                    
+                    swal({
+                        title: "התורים הסתיימו בהצלחה",
+                        text: "הנה הוסיף תורים לרשימה",
+                        icon: "success",
+                        buttons: false,
+                        timer: 3000,
+                    });     
+                    if($scope.users.length > 1){
+                        $scope.users[0].status = 1;
+                        $scope.next = $scope.users[0];
+                    }
+                }
          
         }
 
@@ -80,9 +96,11 @@
                         response.data[i].dateCreated = data.getHours() + ":" + data.getMinutes();
                         $scope.users.push(response.data[i]);
                     }
-                    $scope.next = response.data[0];
-                    $scope.users = response.data;
-                    $scope.users[0].status = 1;
+                    if($scope.users.length >= 1){
+                        $scope.next = response.data[0];
+                        $scope.users = response.data;
+                        $scope.users[0].status = 1;
+                    }
                 });
 
         }
