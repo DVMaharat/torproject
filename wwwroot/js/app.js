@@ -34,7 +34,7 @@
                 swal({
                     title: "אין עוד תורים ברשימה",
                     text: "הנה הוסיף תורים לרשימה",
-                    icon: "success",
+                    icon: "info",
                     buttons: false,
                     timer: 3000,
                 }); 
@@ -81,7 +81,7 @@
                             swal({
                                 title: "התורים הסתיימו בהצלחה",
                                 text: "הנה הוסיף תורים לרשימה",
-                                icon: "success",
+                                icon: "info",
                                 buttons: false,
                                 timer: 3000,
                             });     
