@@ -53,7 +53,7 @@
                 swal({
                     title: "התור הבאה הוא  : " + $scope.users[1].id ,
                     text: $scope.users[1].fullName,
-                    icon: "success",
+                    icon: "info",
                     buttons: false,
                     timer: 3000,
                 }); 
