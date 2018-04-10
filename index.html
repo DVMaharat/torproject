@@ -3,23 +3,58 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <link href="Content/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="Content/css/site.css" rel="stylesheet" />
-    <script src="Content/js/angular.min.js"></script>
-    <script src="http://code.angularjs.org/1.2.1/angular-route.min.js"></script>
-    <script src="./app.js"></script>
+    <link href="wwwroot/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="wwwroot/css/site.css" rel="stylesheet" />
+    <script src="wwwroot/js/angular.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-   
+    <script src="wwwroot/js/app.js"></script>
+
+
+
 </head>
-<body><a href="#list">Red</a>
+<body>
+    <div class="content" ng-controller="indexCtrl">
+        <div class="well">
+            <div class="input-group">
+                <span>שם לקוח</span>
+                <input class="btn btn-lg" name="fullName" ng-model="fullName" id="name" type="text">
+                <button class="btn btn-info btn-lg" type="button" ng-click="addUuser(fullName)">הכנס שם</button>
+            </div>
+        </div>
+        <div class="next_user">
+            <button class="btn btn-info btn-lg" ng-click="nextUser(users[0])">קרא להבא בתור</button>
+            <div class="row">
+                <span>ברשימה:</span>
+                <input type="hidden" value="" />
+                <div class="col-*-*">{{next.id}}</div>
+                <div class="col-*-*">{{next.fullName}}</div>
+                <div class="col-*-*">{{next.dateCreated}}</div>
+            </div>
+        </div>
+        <div class="users-list">
+            <span>רשימת ממתינים:</span>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
 
-    
-
-    <div class="container">
-        <!-- we use ui-view instead of ng-view -->
-        <ng-view></ng-view>
+                        <th>מספר תור</th>
+                        <th>שם לקוח</th>
+                        <th>שעת כניסה לתור</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="u in users| orderBy:'u.id'" ng-if="u.status == 0 " >
+                        <td>{{u.id}}</td>
+                        <td>{{u.fullName}}</td>
+                        <td>{{u.dateCreated}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <toaster-container></toaster-container>
 
 </body>
 </html>
