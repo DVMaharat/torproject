@@ -1,8 +1,20 @@
 ﻿(function () {
 
-    var app = angular.module('app', []);
+    var app = angular.module('app', ['ngRoute']);
 
 
+    app.config(function($routeProvider){
+      $routeProvider
+            .when('/', {
+                        controller: 'indexCtrl',
+                        templateUrl: './home/home.html'
+                    })
+            .when('/list', {
+                        controller: 'indexCtrl',
+                        templateUrl: './userList/list.html'
+                    })
+
+    });
 
     app.controller('indexCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
         var html = "https://torapi20180404071944.azurewebsites.net";
